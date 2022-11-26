@@ -1,4 +1,4 @@
-> # ***Reposteria Morita*** 
+> # ***Reposteria Morita - Grupo 01*** 
 
 ## Repositorio del proyecto 2 como parte del curso Integrador I 
 
