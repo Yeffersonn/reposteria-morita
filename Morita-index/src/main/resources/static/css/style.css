@@ -842,7 +842,10 @@ p {
 #fh5co-menus .fh5co-food-menu ul li .fh5co-food-desc {
   clear: both;
   float: left;
-  width: 80%;
+  width: 70%;
+  height: 80px;
+  display: flex;
+  gap: 16px;
 }
 #fh5co-menus .fh5co-food-menu ul li .fh5co-food-desc > figure {
   width: 20%;
@@ -864,6 +867,8 @@ p {
   position: relative;
   font-size: 14px;
   line-height: 1.5;
+  display: flex;
+  gap: 16px;
 }
 #fh5co-menus .fh5co-food-menu ul li .fh5co-food-desc > div p {
   margin: 0;
@@ -876,10 +881,15 @@ p {
 }
 #fh5co-menus .fh5co-food-menu ul li .fh5co-food-pricing {
   float: right;
-  width: 20%;
+  width: 30%;
+  height: 80px;
   text-align: right;
   font-size: 20px;
   color: #fb6e14;
+  display: flex;
+  position: relative;
+  gap: 16px;
+
 }
 
 #fh5co-events {
@@ -1355,3 +1365,49 @@ p {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.stack{
+  display: flex;
+  gap: 16px;
+}
+
+
+.icon-admin {
+  /* background-color: turquoise; */
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  font-size: 24px;
+  width: min-content;
+  cursor: pointer;
+}
+.icon-admin:hover {
+  filter: grayscale(.6);
+}
+
+.edit{
+  color: rgb(4, 177, 4);
+  right: 48px;
+}
+
+.save{
+  color: rgb(240, 52, 52);
+  right: 16px;
+}
+
+.input-admin{
+  color: black;
+  display: block;
+  width: 80%;
+  position: absolute;
+  bottom: 0;
+  font-size: 16px;
+}
+
+.inactive{
+  display: none;
+}
+.active{
+  display: initial;
+}
+
