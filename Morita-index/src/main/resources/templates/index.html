@@ -39,16 +39,14 @@
 	<link rel="stylesheet" href="../static/css/flexslider.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="../static/css/bootstrap.css">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="../static/css/style.css">
 
 
-	<!-- Modernizr JS -->
+
+
 	<script src="../static/js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+	
 
 	</head>
 	<body>
@@ -278,11 +276,14 @@
 										</figure>
 										<div>
 											<h3>Pastel de chocolate</h3>
+											<!-- <i class="icon-admin edit bi bi-pen-fill" title="Editar" ></i>
+											<i class="icon-admin save bi bi-save-fill" title="Guardar"></i>
+											<input class="input-admin inactive" type="text"> -->
 											<!-- <p>Limón, fresa o maracuyá</p> -->
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/15.00
+										<span>S/15.00</span>
 									</div>
 								</li>
 								<li>
@@ -295,8 +296,8 @@
 											<!-- <p>Limón, fresa o maracuyá</p> -->
 										</div>
 									</div>
-									<div class="fh5co-food-pricing">
-										S/20.00
+									<div class="fh5co-food-pricing ">
+										<span>S/20.00</span>
 									</div>
 								</li>
 								<li>
@@ -310,7 +311,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/8.00
+										<span>S/8.00</span>
 									</div>
 								</li>
 								<li>
@@ -324,7 +325,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/5.00
+										<span>S/5.00</span>
 									</div>
 								</li>
 							</ul>
@@ -346,7 +347,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/30.00
+										<span>S/30.00</span>
 									</div>
 								</li>
 								<li>
@@ -359,7 +360,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/15.00
+										<span>S/15.00</span>
 									</div>
 								</li>
 								<li>
@@ -373,7 +374,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/4.00
+										<span>S/4.00</span>
 									</div>
 								</li>
 								<li>
@@ -387,7 +388,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										S/15.00
+										<span>S/15.00</span>
 									</div>
 								</li>
 							</ul>
@@ -562,9 +563,29 @@
 	       $('#date').datetimepicker();
 	   });
 	</script>
+	
 	<!-- Main JS -->
 	<script src="../static/js/main.js"></script>
+	<script>
+		window.addEventListener('mouseover', initLandbot, { once: true });
+		window.addEventListener('touchstart', initLandbot, { once: true });
+		var myLandbot;
+		function initLandbot() {
+		  if (!myLandbot) {
+			var s = document.createElement('script');s.type = 'text/javascript';s.async = true;
+			s.addEventListener('load', function() {
+			  var myLandbot = new Landbot.Livechat({
+				configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1430185-5RBPHIA3CG8QE8U1/index.json',
+			  });
+			});
+			s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
+			var x = document.getElementsByTagName('script')[0];
+			x.parentNode.insertBefore(s, x);
+		  }
+		}
+		</script>
 
+		<script src="../static/js/vistaAdmin.js"></script>
 	</body>
 </html>
 
