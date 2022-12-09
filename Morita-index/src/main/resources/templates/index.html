@@ -473,21 +473,21 @@
 							<li><i class="icon-globe"></i> <a th:href="@{/loginvista}" href="loginvista.html">Registro CRUD</a></li>
 						</ul>
 					</div>
-					<div class="col-md-6 to-animate-2">
+					<form class="col-md-6 to-animate-2 form-reservacion" action="https://formsubmit.co/U20215320@utp.edu.pe" method="POST">
 						<h3>Realiza tu reservación</h3>
 						<div class="form-group ">
-							<label for="name" class="sr-only">Nombre</label>
-							<input id="name" class="form-control" placeholder="Nombre" type="text">
+							<label for="name" >* : campos requeridos</label>
+							<input id="name"  name="Nombre" class="form-control" placeholder="Nombre *" type="text" autocomplete="off" required>
 						</div>
 						<div class="form-group ">
 							<label for="email" class="sr-only">Correo</label>
-							<input id="email" class="form-control" placeholder="Correo" type="email">
+							<input id="email" name="Correo" class="form-control" placeholder="Correo *" type="email" autocomplete="off" required>
 						</div>
 						<div class="form-group">
 							<label for="occation" class="sr-only">Occation</label>
-							<select class="form-control" id="occation">
-								<option>Selecciona la ocación</option>
-							  <option>Cumpleañons</option>
+							<select class="form-control" id="occation" name="Evento" required>
+							  <option>Selecciona la ocación</option>
+							  <option>Cumpleaños</option>
 							  <option>Festividades</option>
 							  <option>Shows en vivos</option>
 							  <option>Otros</option>
@@ -495,19 +495,27 @@
 						</div>
 						<div class="form-group ">
 							<label for="date" class="sr-only">Date</label>
-							<input id="date" class="form-control" placeholder="Dia &amp; Hora" type="text">
+							<input id="date" name="Dia" class="form-control" placeholder="Dia &amp; Hora de la reservación" type="text" required>
+						</div>
+						
+						
+						
+						<div class="form-group ">
+							<label for="message" class="sr-only">Número de Teléfono</label>
+							<input id="phone" name="Teléfono" class="form-control" placeholder="Ingrese su Número de Teléfono *" type="number" required>
+							<!-- <textarea name="" id="message" name="Mensaje" cols="30" rows="5" class="form-control" placeholder="Escribe tu mensaje" autocomplete="off"></textarea> -->
+						</div>
+						<div class="form-group ">
+							<input class="btn btn-primary" type="submit" value="Enviar" />
 						</div>
 
-
-							
-						<div class="form-group ">
-							<label for="message" class="sr-only">Message</label>
-							<textarea name="" id="message" cols="30" rows="5" class="form-control" placeholder="Escribe tu mensaje"></textarea>
-						</div>
-						<div class="form-group ">
-							<a class="btn btn-primary" th:href="@{/index}" role="button">Enviar Mensaje</a>
-						</div>
-						</div>
+						<input type="hidden" name="_captcha" value="false" />
+						<input type="hidden" name="_cc" value="U20232323@utp.edu.pe,U17202885@utp.edu.pe,U18308730@utp.edu.pe ">
+						<input type="hidden" name="_subject" value="¡Nueva Petición de Reservación🍰!">
+						<input type="hidden" name="_template" value="table">
+						<input type="hidden" name="_next" value="http://127.0.0.1:5500/Morita-index/src/main/resources/templates/gracias.html">
+						<!-- <input type="hidden" name="_next" value="http://127.0.0.1:5500/Morita-index/src/main/resources/templates/index.html"> -->
+					</form>
 				</div>
 			</div>
 		</div>
