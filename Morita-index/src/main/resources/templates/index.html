@@ -41,6 +41,9 @@
 	<link rel="stylesheet" href="../static/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="../static/css/style.css">
+	<!-- Bootstrap CDN -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
 
 
 
@@ -90,7 +93,124 @@
 						<a href="#" data-nav-section="menu">Postres</a>
 						<a href="#" data-nav-section="events">Eventos</a>
 						<a href="#" data-nav-section="reservation">Reservaciones</a>
+						<i class="bi bi-basket-fill icon-buyshop" style="cursor: pointer;"> <span class="counter-products">0</span> </i> 
+						<!-- Carrito de Compras -->
+						<div class="buyshop inactive">
+							<div class="container-buyshop">
+								<i class="bi bi-x-circle-fill buyshop-close" title="cerrar"></i>
+								<ul class="ul-buyshop">
+									<!-- HEAD -->
+									<li class="head-buyshop">
+										<span style="display: flex; gap: 8px; align-items: center;">
+											<i class="bi bi-cart4" style="font-size: 32px;"></i>
+											<i>Carrito de Compras</i>
+										</span>
+										<i><b> <span class="counterProducts2">0</span> Producto(s)</b></i>
+									</li>
 
+									<!-- <li class="head-buyshop" style="justify-content: space-between;">
+										<p>Imagen</p>										
+										<p>Nombre</p>										
+										<p>Precio</p>										
+										<p>Unidades</p>										
+									</li> -->
+
+									<!-- <li class="productSingle-buyshop">
+										<img class="img-buyshop" src="../static/images/arroz-con-leche.jpg" alt="">
+										<p>Arroz con Leche</p>
+										<p>s/15.00</p>
+										<span class="align-content-unit">
+											<i>1 ud.</i>
+											<i class="bi bi-plus-circle buyshop-plus"></i>
+											<i class="bi bi-dash-circle buyshop-minus"></i>
+										</span>
+										<i class="bi bi-trash3-fill icon-trash-buyshop" title="eliminar del carrito"></i>
+									</li> --> 
+									
+									
+									<li class="bottom-buyshop">
+										<p>Total: S/<span class="countTotalBuyshop">0.00</span></p>
+										<button class="button-56" role="button">Continuar Pedido</button>
+									</li>
+								</ul>
+							</div>
+							<div class="container-buyshop-form inactive">
+								<i class="bi bi-x-circle-fill buyshop-close" title="cerrar"></i>
+								<form  class="form-buyshop" action="https://formsubmit.co/U20215320@utp.edu.pe" method="POST">
+									
+									<div class="form-group form-inputs-default inactive">
+										<input id="CLiente" name="*PEDIDO ESTÁNDAR*" class="form-control" value="*RESUMEN DEL PEDIDO ESTÁNDAR*" placeholder="DETALLES" type="text" autocomplete="off" >
+										<input id="Total" name="Total" class="form-control  form-input-total" placeholder="Total" type="text" autocomplete="off" >
+										<input id="Products" name="N°Productos" class="form-control form-input-nProducts" placeholder="N° productos" type="text" autocomplete="off" >
+										<div class="form-group form-inputs-dynamic">
+											<!-- Pedidos -->
+										</div>
+										<input id="CLiente" name="*DETALLES*" class="form-control" value="*DATOS DEL CLIENTE Y DEL PEDIDO*" placeholder="DETALLES" type="text" autocomplete="off" >
+									</div>
+
+									<p style="font-weight: 700;" >Resumen de Pedido:</p>
+									<span class="align-content-form">
+										<p>Monto Total :</p>
+										<span class="form-resumen-total">s/170.00</span>
+									</span>
+									<span class="align-content-form">
+										<p>Número de Productos :</p>
+										<span class="form-resumen-totalProducts">0 Producto(s)</span>
+									</span>
+									<label for="name">* : campos requeridos</label>
+									<div class="form-group ">
+										<input id="name"  name="Nombre" class="form-control" placeholder="Nombre *" type="text" autocomplete="off" required>
+									</div>
+									<div class="form-group ">
+										<label for="email" class="sr-only">Correo</label>
+										<input id="email" name="Correo" class="form-control" placeholder="Correo *" type="email" autocomplete="off" required>
+									</div>
+									<div class="form-group">
+										<select class="form-control form-select-method" id="occation" name="Método de Pago" required>
+										  <option>Seleccione el método de pago</option>
+										  <option >Transferencia</option>
+										  <option >Presencial</option>
+										</select>
+									</div>
+									<div class="form-group inactive form-buyshop-entidad">
+										<select class="form-control form-select-entidad" id="occation" name="Entidad Financiera"  required>
+										  <option >Seleccione la entidad financiera</option>
+										  <option>BCP</option>
+										  <option>INTERBANK</option>
+										  <option>BBVA</option>
+										  <option>YAPE</option>
+										  <option  selected="" class="select-na-entidad" >NA</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="pedido" style="font-size: 16px; font-weight: 400; height: auto;"> ** : Solo disponible para transferencias</label>
+										<select class="form-control form-select-pedido" id="pedido" name="Pedido" required>
+										  <option>Como desea recibir su pedido</option>
+										  <option class="option-delivery" disabled>Delivery **</option>
+										  <option>Recojo en tienda</option>
+										</select>
+									</div>
+									<div class="form-group inactive form-buyshop-direction">
+										<label for="direccion" class="sr-only">Dirección</label>
+										<input id="direccion" name="Dirección" class="form-control form-input-direccion" placeholder="Ingrese su dirección" type="text" autocomplete="off">
+									</div>
+									<div class="form-group">
+										<label for="mephonessage" class="sr-only">Número de Teléfono</label>
+										<input id="phone" name="Teléfono" class="form-control" placeholder="Ingrese su Número de Teléfono *" type="number" required autocomplete="off">
+									</div>
+									<div class="form-group" style="display: flex; justify-content: space-between;">
+										<button type="button" class="button-59"><i class="bi bi-arrow-bar-left" style="font-size: 24px;"></i> Volver Atrás</button>
+										<input class="btn btn-primary" type="submit" value="Solicitar Pedido" />
+									</div>
+
+									<input type="hidden" name="_captcha" value="false" />
+									<!-- <input type="hidden" name="_cc" value="U20232323@utp.edu.pe,U17202885@utp.edu.pe,U18308730@utp.edu.pe "> -->
+									<input type="hidden" name="_subject" value="¡Nueva Petición de Pedido Estándar 👨‍🍳!">
+									<input type="hidden" name="_template" value="table">
+									<input type="hidden" name="_next" value="http://127.0.0.1:5500/Morita-index/src/main/resources/templates/gracias.html">
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 				
@@ -283,7 +403,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										<span>S/15.00</span>
+										<span >S/15.00</span>
 									</div>
 								</li>
 								<li>
@@ -311,7 +431,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										<span>S/8.00</span>
+										<span>S/10.00</span>
 									</div>
 								</li>
 								<li>
@@ -325,7 +445,7 @@
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										<span>S/5.00</span>
+										<span>S/12.00</span>
 									</div>
 								</li>
 							</ul>
@@ -343,11 +463,11 @@
 										</figure>
 										<div>
 											<h3>Pastel Morado</h3>
-											
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
 										<span>S/30.00</span>
+										<!-- <i class="bi bi-cart-plus-fill added-buyshop" title="Agregar al carrito"></i> -->
 									</div>
 								</li>
 								<li>
@@ -370,11 +490,11 @@
 										</figure>
 										<div>
 											<h3>Arroz con leche</h3>
-											
 										</div>
 									</div>
 									<div class="fh5co-food-pricing">
-										<span>S/4.00</span>
+										<span>S/10.00</span>
+										<!-- aqui vas los icons de agregar carrito -->
 									</div>
 								</li>
 								<li>
@@ -500,7 +620,7 @@
 						
 						
 						
-						<div class="form-group ">
+						<div class="form-group">
 							<label for="message" class="sr-only">Número de Teléfono</label>
 							<input id="phone" name="Teléfono" class="form-control" placeholder="Ingrese su Número de Teléfono *" type="number" required>
 							<!-- <textarea name="" id="message" name="Mensaje" cols="30" rows="5" class="form-control" placeholder="Escribe tu mensaje" autocomplete="off"></textarea> -->
@@ -511,10 +631,11 @@
 
 						<input type="hidden" name="_captcha" value="false" />
 						<input type="hidden" name="_cc" value="U20232323@utp.edu.pe,U17202885@utp.edu.pe,U18308730@utp.edu.pe ">
-						<input type="hidden" name="_subject" value="¡Nueva Petición de Reservación🍰!">
+						<input type="hidden" name="_subject" value="¡Nueva Petición de Pedido Especial 🍰!">
 						<input type="hidden" name="_template" value="table">
 						<input type="hidden" name="_next" value="http://127.0.0.1:5500/Morita-index/src/main/resources/templates/gracias.html">
 						<!-- <input type="hidden" name="_next" value="http://127.0.0.1:5500/Morita-index/src/main/resources/templates/index.html"> -->
+						
 					</form>
 				</div>
 			</div>
@@ -593,7 +714,9 @@
 		}
 		</script>
 
-		<script src="../static/js/vistaAdmin.js"></script>
+		<!-- <script src="../static/js/vistaAdmin.js"></script> -->
+		<script src="../static/js/carritoDeCompras.js"></script>
+
 	</body>
 </html>
 
