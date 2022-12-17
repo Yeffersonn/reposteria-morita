@@ -29,8 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
 function listenerTargetAdded(targets) {
     targets.map(target => {
         target.addEventListener('click', ({ target }) => {
-            updateCounters();
-            addedProduct(target);
+            const nameProduct = target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.firstElementChild.innerText
+            const targetLiBuyShop = [...document.querySelectorAll('.productSingle-buyshop')];
+            const boolean = targetLiBuyShop.some(targetLi => targetLi.firstElementChild.nextElementSibling.innerText === nameProduct)
+            if (!boolean) {
+                updateCounters();
+                addedProduct(target);
+                target.classList.remove('bi-cart-plus-fill')
+                target.classList.add('bi-cart-check-fill')
+                target.style = 'filter: contrast(.4); cursor: default'
+            }
         })
     })
 }
@@ -59,7 +67,7 @@ function addedProduct(target) {
     listenerDeleteProduct();
 }
 
-function listenerDeleteProduct(){
+function listenerDeleteProduct() {
     const targetsDeleteIcon = [...document.querySelectorAll('.icon-trash-buyshop')]
     targetsDeleteIcon.map(target => {
         target.removeEventListener('click', actionDeleteProductBuyShop)
@@ -69,8 +77,40 @@ function listenerDeleteProduct(){
     })
 }
 
-function actionDeleteProductBuyShop({target}){
+function actionDeleteProductBuyShop({ target }) {
+    const [units, _] = target.previousElementSibling.innerText.split(' ')
+    const [__, price] = target.previousElementSibling.previousElementSibling.innerText.split('/')
+    const substractTotal = Number(units) * Number(price)
+    countTotalBuyshop -= substractTotal;
+    updateCounterProductSubstract();
+    deleteInputDynamic(target.previousElementSibling.previousElementSibling.previousElementSibling.innerText)
+    countTotalBuyshopTarget.innerText = `${countTotalBuyshop}.00`
     target.parentElement.remove();
+    removeContrastIconAdded(target)
+}
+
+function removeContrastIconAdded(target) {
+    const nameProduct = target.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+    const targetProductsIndex = [...document.querySelectorAll('.fh5co-food-desc div h3')];
+    const elementFind = targetProductsIndex.find(targetIndex => targetIndex.innerText === nameProduct);
+    const targetIconAdded = elementFind.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling;
+    targetIconAdded.classList.remove('bi-cart-check-fill')
+    targetIconAdded.style = 'filter: contrast(1); cursor: pointer'
+    targetIconAdded.classList.add('bi-cart-plus-fill')
+}
+
+function deleteInputDynamic(target) {
+    const targetsInputDynamic = [...containerInputsDynamic.querySelectorAll('input')]
+    if (targetsInputDynamic.length !== 0) {
+        const findTarget = targetsInputDynamic.find(targetInput => targetInput.name === target)
+        findTarget.remove();
+    }
+}
+
+function updateCounterProductSubstract() {
+    countProductsBuyshop--;
+    counterProducts.innerText = countProductsBuyshop;
+    counterProducts2.innerText = countProductsBuyshop;
 }
 
 function listenerUnitsProducts() {
@@ -105,21 +145,21 @@ function actionSubstractUnitsBuyShop({ target }) {
     let [ud, _] = target.previousElementSibling.previousElementSibling.innerText.split(' ');
     if (ud == 2) {
         target.previousElementSibling.previousElementSibling.innerText = `${--ud} ud.`;
-        const [__,price ] = target.parentElement.previousElementSibling.innerText.split('/')
+        const [__, price] = target.parentElement.previousElementSibling.innerText.split('/')
         updateTotalProductsForUnits(price, '-')
-    }else if(ud > 1){
+    } else if (ud > 1) {
         target.previousElementSibling.previousElementSibling.innerText = `${--ud} uds.`;
-        const [__,price ] = target.parentElement.previousElementSibling.innerText.split('/')
+        const [__, price] = target.parentElement.previousElementSibling.innerText.split('/')
         updateTotalProductsForUnits(price, '-')
     }
 
 }
 
 function updateTotalProductsForUnits(price, operator) {
-    if(operator === '+'){
+    if (operator === '+') {
         countTotalBuyshop += Number(price)
         countTotalBuyshopTarget.innerText = `${countTotalBuyshop}.00`
-    }else if(operator === '-'){
+    } else if (operator === '-') {
         countTotalBuyshop -= Number(price)
         countTotalBuyshopTarget.innerText = `${countTotalBuyshop}.00`
     }
@@ -139,7 +179,7 @@ function updateCounters() {
 function cargarCarritos() {
     targetAddedBuyShop.map(target => {
         target.innerHTML += `
-        <i class="bi bi-cart-plus-fill added-buyshop" title="Agregar al carrito"></i>
+        <i class="bi bi-cart-plus-fill added-buyshop " title="Agregar al carrito" disabled></i>
         `
     })
 
@@ -181,19 +221,25 @@ const containerInputsDynamic = document.querySelector('.form-inputs-dynamic')
 const formInputTotal = document.querySelector('.form-input-total')
 const formInputNproducts = document.querySelector('.form-input-nProducts')
 
+/* SPINNER */
 
+const spinner = document.querySelector('.sk-chase')
 
-
-
-buttonOpenForm.addEventListener('click', ({target}) => {
-    if(countProductsBuyshop !== 0){
-        updateForm();
-        const targetsBuyShop = [...containerBuyshop.querySelectorAll('.productSingle-buyshop')];
-        updateInputsDefault(targetsBuyShop);
+buttonOpenForm.addEventListener('click', ({ target }) => {
+    if (countProductsBuyshop !== 0) {
+        spinner.classList.remove('inactive')
+        ulBuyshop.classList.add('inactive')
+        setTimeout(() => {
+            ulBuyshop.classList.remove('inactive')
+            spinner.classList.add('inactive')
+            updateForm();
+            const targetsBuyShop = [...containerBuyshop.querySelectorAll('.productSingle-buyshop')];
+            updateInputsDefault(targetsBuyShop);
+        }, 2000)
     }
 })
 
-function updateInputsDefault(targets){
+function updateInputsDefault(targets) {
     formInputTotal.value = `S/${countTotalBuyshop}.00`;
     formInputNproducts.value = countProductsBuyshop;
 
@@ -210,15 +256,15 @@ function updateInputsDefault(targets){
 
 }
 
-function updateForm(){
-        containerBuyshop.classList.add('inactive')
-        containerBuyshopForm.classList.remove('inactive')
-        formResumenTotal.innerText = `S/${countTotalBuyshop}.00`;
-        formResumenTotalProducts.innerText = `${countProductsBuyshop} Producto(s)`;
+function updateForm() {
+    containerBuyshop.classList.add('inactive')
+    containerBuyshopForm.classList.remove('inactive')
+    formResumenTotal.innerText = `S/${countTotalBuyshop}.00`;
+    formResumenTotalProducts.innerText = `${countProductsBuyshop} Producto(s)`;
 }
 
 
-buttonCloseForm.addEventListener('click', ({target}) => {
+buttonCloseForm.addEventListener('click', ({ target }) => {
     containerBuyshopForm.classList.add('inactive')
     containerBuyshop.classList.remove('inactive')
 })
@@ -226,26 +272,27 @@ buttonCloseForm.addEventListener('click', ({target}) => {
 
 
 
-selectMethod.addEventListener('input', ({target}) => {
-    if(target.value.toLowerCase() === 'transferencia'){
+selectMethod.addEventListener('input', ({ target }) => {
+    if (target.value.toLowerCase() === 'transferencia') {
         formBuyshopEntidad.classList.remove('inactive')
         optionDelivery.removeAttribute('disabled')
         selectNaEntidad.removeAttribute('selected')
         selectNaEntidad.setAttribute('disabled', '')
-    }else{
+    } else {
         formBuyshopEntidad.classList.add('inactive')
         optionDelivery.setAttribute('disabled', '')
-        selectNaEntidad.setAttribute('selected','')
+        selectNaEntidad.setAttribute('selected', '')
 
     }
 })
 
-formSelectPedido.addEventListener('input', ({target})=>{
-    if(target.value.toLowerCase() === 'delivery **'){
-        formBuyshopDirection.classList.remove('inactive')
-    }else{
-        formBuyshopDirection.classList.add('inactive')
-        formInputDireccion.value = 'NA'
+formSelectPedido.addEventListener('input', ({ target }) => {
+    if (target.value.toLowerCase() === 'delivery **') {
+        formBuyshopDirection.classList.remove('inactive');
+        formInputDireccion.value = '';
+    } else {
+        formBuyshopDirection.classList.add('inactive');
+        formInputDireccion.value = 'NA';
     }
 })
 
